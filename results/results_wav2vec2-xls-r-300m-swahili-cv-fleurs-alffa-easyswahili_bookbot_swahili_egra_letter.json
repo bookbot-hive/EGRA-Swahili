@@ -1,0 +1,66 @@
+{
+  "model": "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili",
+  "dataset": "bookbot/bookbot_swahili_egra",
+  "subtask": "letter",
+  "per": 0.08620689655172414,
+  "substitution_pairs": [
+    [
+      "ð",
+      "v"
+    ],
+    [
+      "ɣ",
+      "ɠ"
+    ],
+    [
+      "ⁿz",
+      "z"
+    ],
+    [
+      "x",
+      "h"
+    ],
+    [
+      "w",
+      "u"
+    ],
+    [
+      "ʃ",
+      "s"
+    ],
+    [
+      "θ",
+      "ð"
+    ],
+    [
+      "ⁿɗ͡ʒ",
+      "ʄ"
+    ],
+    [
+      "ɗ",
+      "ð"
+    ],
+    [
+      "θ",
+      "t"
+    ]
+  ],
+  "substitutions": {
+    "ɣ -> v": 1,
+    "h -> p": 1,
+    "x -> k": 1,
+    "ᵑg -> n": 1,
+    "u -> ɛ": 1
+  },
+  "insertions": {},
+  "deletions": {},
+  "errors": {
+    "ð ɑ -> ɗ ɑ": 1,
+    "ɣ ɑ -> v ɑ": 1,
+    "h ɑ -> p ɑ": 1,
+    "x ɑ -> k ɑ": 1,
+    "ᵑg ɑ -> n ɑ": 1,
+    "θ ɑ -> t ɑ": 1,
+    "u -> ɛ": 1
+  }
+}

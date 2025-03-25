@@ -127,6 +127,8 @@ def main(args):
             ("ʃ", "s"),
             ("θ", "ð"),
             ("ⁿɗ͡ʒ", "ʄ"),
+            ("ɗ", "ð"),
+            ("θ", "t"),
         ]
     else:
         substitution_pairs = []
