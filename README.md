@@ -20,16 +20,16 @@ for subtask in syllable word letter; do
 done
 ```
 
-## Sample Test Dataset Format
+## EGRA Dataset
+
+The EGRA Swahili dataset is a collection of audio recordings and transcriptions of Swahili text. The dataset is split into three subtasks: syllable, word, and letter. The dataset is available on the Hugging Face Datasets Hub [here](https://huggingface.co/datasets/bookbot/bookbot_swahili_egra/). The dataset contains the following columns:
 
 | audio                                           | transcript | phonemes         | subtask  |
 | ----------------------------------------------- | ---------- | ---------------- | -------- |
 | syllable/sw-TZ-Victoria_syllable_1150_0_nte.wav | nte        | n t ɛ            | syllable |
 | syllable/sw-TZ-Victoria_syllable_1150_0_sa.wav  | sa         | s ɑ              | syllable |
-| syllable/sw-TZ-Victoria_syllable_1150_1_kwa.wav | kwa        | k w ɑ            | syllable |
 | word/sw-TZ-Victoria_001158_upinzani.wav         | upinzani   | u p i ⁿz ɑ n i   | word     |
 | word/sw-TZ-Victoria_001169_kiburunzi.wav        | kiburunzi  | k i ɓ u ɾ u ⁿz i | word     |
-| word/sw-TZ-Victoria_001169_mdanzi.wav           | mdanzi     | m ɗ ɑ ⁿz i       | word     |
 | letter/a.wav                                    | a          | ɑ                | letter   |
 | letter/ba.wav                                   | ba         | ɓ ɑ              | letter   |
 | letter/cha.wav                                  | cha        | t͡ʃ ɑ             | letter   |
