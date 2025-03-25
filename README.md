@@ -2,33 +2,46 @@
 
 ## Usage
 
-```sh
-python src/egra_inference.py \
-    --model_name "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa" \
-    --dataset_name "bookbot/bookbot_swahili_egra" \
-    --split_name "test" \
-    --subtask "syllable" \
-    --use_substitution_pairs
+To run the EGRA inference script, you need to specify the model, dataset, and split name. The `subtask` argument can be one of `syllable`, `word`, or `letter`.
+At the moment, we support wav2vec2-CTC models that are integrated with the Hugging Face transformers library.
 
-python src/egra_inference.py \
-    --model_name "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa" \
-    --dataset_name "bookbot/bookbot_swahili_egra" \
-    --split_name "test" \
-    --subtask "word" \
-    --use_substitution_pairs
+```sh
+model=bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili
+dataset=bookbot/bookbot_swahili_egra
+split=test
+
+for subtask in syllable word letter; do
+    python src/egra_inference.py \
+        --model_name $model \
+        --dataset_name $dataset \
+        --split_name $split \
+        --subtask $subtask \
+        --use_substitution_pairs
+done
 ```
 
-## Dataset Format
+## Sample Test Dataset Format
 
 | audio                                           | transcript | phonemes         | subtask  |
 | ----------------------------------------------- | ---------- | ---------------- | -------- |
-| syllable/sw-TZ-Victoria_syllable_1150_0_a.wav   | a          | ɑ                | syllable |
 | syllable/sw-TZ-Victoria_syllable_1150_0_nte.wav | nte        | n t ɛ            | syllable |
 | syllable/sw-TZ-Victoria_syllable_1150_0_sa.wav  | sa         | s ɑ              | syllable |
 | syllable/sw-TZ-Victoria_syllable_1150_1_kwa.wav | kwa        | k w ɑ            | syllable |
-| syllable/sw-TZ-Victoria_syllable_1150_2_a.wav   | a          | ɑ                | syllable |
 | word/sw-TZ-Victoria_001158_upinzani.wav         | upinzani   | u p i ⁿz ɑ n i   | word     |
 | word/sw-TZ-Victoria_001169_kiburunzi.wav        | kiburunzi  | k i ɓ u ɾ u ⁿz i | word     |
 | word/sw-TZ-Victoria_001169_mdanzi.wav           | mdanzi     | m ɗ ɑ ⁿz i       | word     |
-| word/sw-TZ-Victoria_001169_sunzika.wav          | sunzika    | s u ⁿz i k ɑ     | word     |
-| word/sw-TZ-Victoria_001169_uunzi.wav            | uunzi      | u u ⁿz i         | word     |
+| letter/a.wav                                    | a          | ɑ                | letter   |
+| letter/ba.wav                                   | ba         | ɓ ɑ              | letter   |
+| letter/cha.wav                                  | cha        | t͡ʃ ɑ             | letter   |
+
+## Results
+
+The following table shows the performance of the model on the test set of the EGRA Swahili dataset.
+
+Model: [`bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili`](https://huggingface.co/bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili)
+
+| Subtask  | PER (%) |
+| -------- | ------: |
+| Syllable |    4.25 |
+| Word     |    3.13 |
+| Letter   |    8.62 |

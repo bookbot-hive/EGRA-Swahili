@@ -1,20 +1,12 @@
-python src/egra_inference.py \
-    --model_name "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili" \
-    --dataset_name "bookbot/bookbot_swahili_egra" \
-    --split_name "test" \
-    --subtask "syllable" \
-    --use_substitution_pairs
+model=bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili
+dataset=bookbot/bookbot_swahili_egra
+split=test
 
-python src/egra_inference.py \
-    --model_name "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili" \
-    --dataset_name "bookbot/bookbot_swahili_egra" \
-    --split_name "test" \
-    --subtask "word" \
-    --use_substitution_pairs
-
-python src/egra_inference.py \
-    --model_name "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili" \
-    --dataset_name "bookbot/bookbot_swahili_egra" \
-    --split_name "test" \
-    --subtask "letter" \
-    --use_substitution_pairs
+for subtask in syllable word letter; do
+    python src/egra_inference.py \
+        --model_name $model \
+        --dataset_name $dataset \
+        --split_name $split \
+        --subtask $subtask \
+        --use_substitution_pairs
+done
