@@ -1,6 +1,8 @@
 # EGRA-Swahili
 
-## Usage
+## EGRA
+
+### Inference
 
 To run the EGRA inference script, you need to specify the model, dataset, and split name. The `subtask` argument can be one of `syllable`, `word`, or `letter`.
 At the moment, we support wav2vec2-CTC models that are integrated with the Hugging Face transformers library.
@@ -20,7 +22,7 @@ for subtask in syllable word letter; do
 done
 ```
 
-## EGRA Dataset
+### EGRA Dataset
 
 The EGRA Swahili dataset is a collection of audio recordings and transcriptions of Swahili text. The dataset is split into three subtasks: syllable, word, and letter. The dataset is available on the Hugging Face Datasets Hub [here](https://huggingface.co/datasets/bookbot/bookbot_swahili_egra/). The dataset contains the following columns:
 
@@ -34,7 +36,7 @@ The EGRA Swahili dataset is a collection of audio recordings and transcriptions 
 | letter/ba.wav                                   | ba         | ɓ ɑ              | letter   |
 | letter/cha.wav                                  | cha        | t͡ʃ ɑ             | letter   |
 
-## Results
+### Results
 
 The following table shows the performance of the model on the test set of the EGRA Swahili dataset.
 
@@ -45,3 +47,41 @@ Model: [`bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili`](https
 | Syllable |    4.25 |
 | Word     |    3.13 |
 | Letter   |    8.62 |
+
+## Sentence-level Task
+
+### Inference
+
+```sh
+MODEL="bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili"
+
+python src/inference.py \
+    --model=$MODEL \
+    --dataset="bookbot/common_voice_16_1_sw" \
+    --split="test" \
+    --text_column_name="phonemes_ipa" \
+    --chars_to_ignore , ? . ! - \; \: \" “ % ‘ ” �
+
+python src/inference.py \
+    --model=$MODEL \
+    --dataset="bookbot/fleurs_sw" \
+    --split="test" \
+    --text_column_name="phonemes_ipa" \
+    --chars_to_ignore , ? . ! - \; \: \" “ % ‘ ” �
+```
+
+### Datasets
+
+We provide pre-phonemized, sentence-level task datasets on the Hugging Face Datasets Hub:
+
+- [Common Voice Swahili](https://huggingface.co/datasets/bookbot/common_voice_16_1_sw)
+- [FLEURS Swahili](https://huggingface.co/datasets/bookbot/fleurs_sw)
+
+### Results
+
+Model: [`bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili`](https://huggingface.co/bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili)
+
+| Dataset      | PER (%) |
+| ------------ | ------: |
+| Common Voice |    6.52 |
+| FLEURS       |    4.85 |
