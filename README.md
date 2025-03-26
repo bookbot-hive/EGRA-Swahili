@@ -43,7 +43,7 @@ The EGRA Swahili dataset is a collection of audio recordings and transcriptions 
 Similarly we provide a script to run the sentence-level task. The script requires the model, dataset, split, and the column name of the text to be transcribed.
 
 ```sh
-MODEL="bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili"
+MODEL="bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes"
 
 python src/sentence_inference.py \
     --model=$MODEL \
