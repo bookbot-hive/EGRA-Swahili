@@ -27,16 +27,10 @@ The EGRA Swahili dataset is a collection of audio recordings and transcriptions 
 | audio                                           | transcript | phonemes         | subtask     |
 | ----------------------------------------------- | ---------- | ---------------- | ----------- |
 | syllable/sw-TZ-Victoria_syllable_1150_0_nte.wav | nte        | n t ɛ            | syllable    |
-| syllable/sw-TZ-Victoria_syllable_1150_0_sa.wav  | sa         | s ɑ              | syllable    |
 | word/sw-TZ-Victoria_001158_upinzani.wav         | upinzani   | u p i ⁿz ɑ n i   | word        |
-| word/sw-TZ-Victoria_001169_kiburunzi.wav        | kiburunzi  | k i ɓ u ɾ u ⁿz i | word        |
-| letter/a.wav                                    | a          | ɑ                | letter      |
-| letter/ba.wav                                   | ba         | ɓ ɑ              | letter      |
 | letter/cha.wav                                  | cha        | t͡ʃ ɑ             | letter      |
 | phoneme/ð.wav                                   | ð          | ð                | phoneme     |
-| phoneme/ɛ.wav                                   | ɛ          | ɛ                | phoneme     |
 | pseudo_word/zungate                             | zungate    | z u ᵑg ɑ t ɛ     | pseudo_word |
-| pseudo_word/odembeka                            | odembeka   | ɔ ɗ ɛ ᵐɓ ɛ k ɑ   | pseudo_word |
 
 ## Sentence-level Task
 
