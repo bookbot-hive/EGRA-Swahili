@@ -25,7 +25,12 @@ def parse_args():
     parser.add_argument("--model_name", type=str, required=True)
     parser.add_argument("--dataset_name", type=str, required=True)
     parser.add_argument("--split_name", type=str, default="test")
-    parser.add_argument("--subtask", type=str, choices=["syllable", "word", "letter", "phoneme"], required=True)
+    parser.add_argument(
+        "--subtask",
+        type=str,
+        choices=["syllable", "word", "letter", "phoneme", "pseudo_word"],
+        required=True,
+    )
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--audio_column_name", type=str, default="audio")
     parser.add_argument("--label_column_name", type=str, default="phonemes")
@@ -86,7 +91,10 @@ def calculate_error_stats(labels, predictions, substitution_pairs=[]):
 
 
 def main(args):
-    args.output_dir.mkdir(exist_ok=True, parents=True)
+    model_name = args.model_name.split("/")[-1]
+    dataset_name = args.dataset_name.split("/")[-1]
+    output_dir = args.output_dir / model_name / "egra"
+    output_dir.mkdir(exist_ok=True, parents=True)
 
     transcriber = pipeline(
         "automatic-speech-recognition",
@@ -145,10 +153,7 @@ def main(args):
         **calculate_error_stats(labels, predictions, substitution_pairs),
     }
 
-    model_name = args.model_name.split("/")[-1]
-    dataset_name = args.dataset_name.split("/")[-1]
-
-    with open(f"{args.output_dir}/results_{model_name}_{dataset_name}_{args.subtask}.json", "w") as f:
+    with open(f"{output_dir}/{dataset_name}_{args.subtask}.json", "w") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
 

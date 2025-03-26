@@ -1,4 +1,4 @@
-MODEL="bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili"
+MODEL="bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes"
 
 python src/inference.py \
     --model=$MODEL \
