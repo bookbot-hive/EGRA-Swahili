@@ -45,14 +45,14 @@ Similarly we provide a script to run the sentence-level task. The script require
 ```sh
 MODEL="bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili"
 
-python src/inference.py \
+python src/sentence_inference.py \
     --model=$MODEL \
     --dataset="bookbot/common_voice_16_1_sw" \
     --split="test" \
     --text_column_name="phonemes_ipa" \
     --chars_to_ignore , ? . ! - \; \: \" “ % ‘ ” �
 
-python src/inference.py \
+python src/sentence_inference.py \
     --model=$MODEL \
     --dataset="bookbot/fleurs_sw" \
     --split="test" \
@@ -73,12 +73,11 @@ The following table shows the performance of the model on the test sets:
 
 Model: [`bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes`](https://huggingface.co/bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes)
 
-| Subtask                 | PER (%) |
-| ----------------------- | ------: |
-| Syllable                |    3.77 |
-| Word                    |    2.35 |
-| Pseudo Word             |    3.33 |
-| Letter                  |    3.44 |
-| Phoneme                 |   25.92 |
-| Sentence (Common Voice) |    6.42 |
-| Sentence (FLEURS)       |    4.85 |
+| Subtask     | PER (%) |
+| ----------- | ------: |
+| Sentence    |    6.28 |
+| Word        |    2.35 |
+| Pseudo Word |    3.33 |
+| Syllable    |    3.77 |
+| Letter      |    3.44 |
+| Phoneme     |   25.92 |
