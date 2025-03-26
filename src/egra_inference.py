@@ -15,7 +15,8 @@ Usage:
 python src/egra_inference.py \
     --model_name "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa" \
     --dataset_name "bookbot/bookbot_swahili_egra" \
-    --split_name "test"
+    --split_name "test" \
+    --subtask "word"
 """
 
 
@@ -24,7 +25,7 @@ def parse_args():
     parser.add_argument("--model_name", type=str, required=True)
     parser.add_argument("--dataset_name", type=str, required=True)
     parser.add_argument("--split_name", type=str, default="test")
-    parser.add_argument("--subtask", type=str, choices=["syllable", "word", "letter"])
+    parser.add_argument("--subtask", type=str, choices=["syllable", "word", "letter", "phoneme"], required=True)
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--audio_column_name", type=str, default="audio")
     parser.add_argument("--label_column_name", type=str, default="phonemes")

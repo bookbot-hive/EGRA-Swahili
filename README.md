@@ -12,7 +12,7 @@ model=bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili
 dataset=bookbot/bookbot_swahili_egra
 split=test
 
-for subtask in syllable word letter; do
+for subtask in syllable word letter phoneme; do
     python src/egra_inference.py \
         --model_name $model \
         --dataset_name $dataset \
@@ -24,7 +24,7 @@ done
 
 ### EGRA Dataset
 
-The EGRA Swahili dataset is a collection of audio recordings and transcriptions of Swahili text. The dataset is split into three subtasks: syllable, word, and letter. The dataset is available on the Hugging Face Datasets Hub [here](https://huggingface.co/datasets/bookbot/bookbot_swahili_egra/). The dataset contains the following columns:
+The EGRA Swahili dataset is a collection of audio recordings and transcriptions of Swahili text. The dataset is split into subtasks: syllable, word, phoneme, and letter. The dataset is available on the Hugging Face Datasets Hub [here](https://huggingface.co/datasets/bookbot/bookbot_swahili_egra/). The dataset contains the following columns:
 
 | audio                                           | transcript | phonemes         | subtask  |
 | ----------------------------------------------- | ---------- | ---------------- | -------- |
@@ -35,6 +35,8 @@ The EGRA Swahili dataset is a collection of audio recordings and transcriptions 
 | letter/a.wav                                    | a          | ɑ                | letter   |
 | letter/ba.wav                                   | ba         | ɓ ɑ              | letter   |
 | letter/cha.wav                                  | cha        | t͡ʃ ɑ             | letter   |
+| phoneme/ð.wav                                   | ð          | ð                | phoneme  |
+| phoneme/ɛ.wav                                   | ɛ          | ɛ                | phoneme  |
 
 ### Results
 
