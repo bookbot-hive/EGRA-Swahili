@@ -1,8 +1,8 @@
 {
   "model": "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes-bookbot",
-  "dataset": "bookbot/bookbot_swahili_egra_althaf",
-  "subtask": "syllable",
-  "per": 0.045871559633027525,
+  "dataset": "bookbot/bookbot_swahili_egra_kids",
+  "subtask": "letter",
+  "per": 0.023809523809523808,
   "substitution_pairs": [
     [
       "ð",
@@ -50,29 +50,12 @@
     ]
   ],
   "substitutions": {
-    "u -> ɔ": 3,
-    "t -> k": 1,
-    "ɗ -> ɓ": 1,
-    "k -> ɔ": 1,
-    "l -> ɠ": 1,
-    "s -> f": 1
+    "u -> ɔ": 1
   },
-  "insertions": {
-    "m": 1
-  },
-  "deletions": {
-    "u": 1
-  },
+  "insertions": {},
+  "deletions": {},
   "errors": {
-    "t u -> t ɔ": 1,
-    "w ɛ -> m w ɛ": 1,
-    "t ɑ -> k ɑ": 1,
-    "k u -> k ɔ": 1,
-    "ɗ ɑ -> ɓ ɑ": 1,
     "ɠ ɑ -> ɣ ɑ": 1,
-    "k u -> ɔ": 1,
-    "l ɑ -> ɠ ɑ": 1,
-    "t͡ʃ u -> t͡ʃ ɔ": 1,
-    "s i -> f i": 1
+    "u -> ɔ": 1
   }
 }

@@ -12,7 +12,7 @@ split=test
 for subtask in syllable letter phoneme pseudo_word; do
     python src/egra_inference.py \
         --model_name $model \
-        --dataset_name bookbot/bookbot_swahili_egra_althaf \
+        --dataset_name bookbot/bookbot_swahili_egra_kids \
         --split_name $split \
         --subtask $subtask \
         --use_substitution_pairs
@@ -23,9 +23,9 @@ done
 
 We provide letter-level tasks which include syllable, word, letter, phoneme, and pseudo-word subtasks. The datasets are available on the Hugging Face Datasets Hub:
 
-- [Swahili EGRA Althaf (Kids)](https://huggingface.co/datasets/bookbot/bookbot_swahili_egra_althaf)
+- [Swahili EGRA Kids](https://huggingface.co/datasets/bookbot/bookbot_swahili_egra_kids)
 
-> ‼️ Note: Swahili EGRA Althaf currently do not support the single-word task as a private evaluation was conducted.
+> ‼️ Note: Swahili EGRA Kids currently do not support the single-word task as a private evaluation was conducted.
 
 ## Sentence-level Task
 
@@ -59,11 +59,11 @@ The following table shows the performance of the model on the test sets:
 
 Model: [`bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes-bookbot`](https://huggingface.co/bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes-bookbot)
 
-| Dataset     | Subtask     | PER (%) |
-| ----------- | ----------- | ------: |
-| EGRA Althaf | Sentence    |    0.50 |
-| EGRA Althaf | Word        |    1.10 |
-| EGRA Althaf | Pseudo Word |    4.85 |
-| EGRA Althaf | Syllable    |    4.58 |
-| EGRA Althaf | Letter      |    2.38 |
-| EGRA Althaf | Phoneme     |    9.09 |
+| Subtask     | PER (%) |
+| ----------- | ------: |
+| Sentence    |    0.50 |
+| Word        |    1.10 |
+| Pseudo Word |    4.85 |
+| Syllable    |    4.58 |
+| Letter      |    2.38 |
+| Phoneme     |    9.09 |

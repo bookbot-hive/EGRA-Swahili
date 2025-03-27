@@ -1,8 +1,8 @@
 {
   "model": "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes-bookbot",
-  "dataset": "bookbot/bookbot_swahili_egra_althaf",
-  "subtask": "pseudo_word",
-  "per": 0.04854368932038835,
+  "dataset": "bookbot/bookbot_swahili_egra_kids",
+  "subtask": "syllable",
+  "per": 0.045871559633027525,
   "substitution_pairs": [
     [
       "ð",
@@ -50,18 +50,29 @@
     ]
   ],
   "substitutions": {
-    "ɛ -> ɑ": 2,
-    "ɛ -> i": 1,
-    "ɔ -> ɑ": 1,
-    "ɔ -> u": 1
+    "u -> ɔ": 3,
+    "t -> k": 1,
+    "ɗ -> ɓ": 1,
+    "k -> ɔ": 1,
+    "l -> ɠ": 1,
+    "s -> f": 1
   },
-  "insertions": {},
-  "deletions": {},
+  "insertions": {
+    "m": 1
+  },
+  "deletions": {
+    "u": 1
+  },
   "errors": {
-    "ɑ ɗ ɔ s ɛ t i -> ɑ ɗ ɔ s ɑ t i": 1,
-    "m ɛ ɓ ɔ ʄ ɔ -> m i ɓ ɔ ʄ ɔ": 1,
-    "ɔ ɗ ɛ ᵐɓ ɛ k ɑ -> ɑ ɗ ɛ ᵐɓ ɛ k ɑ": 1,
-    "t ɛ ɠ i n ɑ -> t ɑ ɠ i n ɑ": 1,
-    "z ɑ ɓ ɔ k i -> z ɑ ɓ u k i": 1
+    "t u -> t ɔ": 1,
+    "w ɛ -> m w ɛ": 1,
+    "t ɑ -> k ɑ": 1,
+    "k u -> k ɔ": 1,
+    "ɗ ɑ -> ɓ ɑ": 1,
+    "ɠ ɑ -> ɣ ɑ": 1,
+    "k u -> ɔ": 1,
+    "l ɑ -> ɠ ɑ": 1,
+    "t͡ʃ u -> t͡ʃ ɔ": 1,
+    "s i -> f i": 1
   }
 }

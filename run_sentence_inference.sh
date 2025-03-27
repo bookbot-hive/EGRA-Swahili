@@ -11,7 +11,7 @@ done
 
 python src/sentence_inference.py \
     --model $model \
-    --dataset "bookbot/bookbot_sw_v4" \
+    --dataset bookbot/bookbot_sw_v4 \
     --split test \
     --text_column_name phonemes \
     --chars_to_ignore , ? . ! - \; \: \" “ % ‘ ” �
