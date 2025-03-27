@@ -1,0 +1,87 @@
+{
+  "model": "bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes-bookbot",
+  "dataset": "bookbot/bookbot_swahili_egra_kids",
+  "subtask": "word",
+  "per": 0.0057598582188746125,
+  "substitution_pairs": [
+    [
+      "ð",
+      "v"
+    ],
+    [
+      "ɣ",
+      "ɠ"
+    ],
+    [
+      "ⁿz",
+      "z"
+    ],
+    [
+      "x",
+      "h"
+    ],
+    [
+      "w",
+      "u"
+    ],
+    [
+      "ʃ",
+      "s"
+    ],
+    [
+      "θ",
+      "ð"
+    ],
+    [
+      "ⁿɗ͡ʒ",
+      "ʄ"
+    ],
+    [
+      "ɗ",
+      "ð"
+    ],
+    [
+      "θ",
+      "t"
+    ],
+    [
+      "s",
+      "z"
+    ]
+  ],
+  "substitutions": {
+    "ᵐɓ -> ᵑg": 1,
+    "k -> f": 1,
+    "u -> i": 1,
+    "ɛ -> ɑ": 1,
+    "ɛ ⁿɗ -> ɑ n": 1,
+    "i -> ɑ": 1,
+    "ɛ -> i": 1
+  },
+  "insertions": {
+    "u": 1,
+    "ɑ": 1,
+    "h": 1,
+    "n ɑ": 1,
+    "l ɑ": 1
+  },
+  "deletions": {
+    "ɑ": 1
+  },
+  "errors": {
+    "ɑ n ɑ ʄ i s u ᵐɓ u ɑ -> ɑ n ɑ ʄ i s u ᵑg u ɑ": 1,
+    "h ɑ k u s i m ɑ m ɑ -> h ɑ f u s i m ɑ m ɑ": 1,
+    "t ɑ ɑ -> t ɑ": 1,
+    "w ɑ n ɑ s i m u l i ɑ -> w ɑ n ɑ s i m i l i ɑ": 1,
+    "n i m ɛ t͡ʃ ɔ k ɑ -> n i m ɑ t͡ʃ ɔ k ɑ": 1,
+    "n ɑ -> n ɑ u": 1,
+    "ɑ n ɑ p ɛ ⁿɗ ɑ -> ɑ n ɑ p ɑ n ɑ": 1,
+    "t u n ɑ p ɔ ʃ i ɾ i k i -> t u n ɑ p ɔ ʃ i ɾ i k ɑ": 1,
+    "ɑ m ɛ p ɔ t ɛ z ɑ -> ɑ m ɛ p ɔ t ɛ z ɑ ɑ": 1,
+    "s ɑ m ɑ h ɑ n i -> z ɑ m ɑ h ɑ n i": 1,
+    "ɑ l i v i s i f u -> h ɑ l i v i s i f u": 1,
+    "v i ᵑg i n ɛ v j ɔ -> v i ᵑg i n i v j ɔ": 1,
+    "ɑ m ɛ p ɔ t ɛ z ɑ -> ɑ n ɑ m ɛ p ɔ t ɛ z ɑ": 1,
+    "s ɑ n ɑ -> s ɑ n ɑ l ɑ": 1
+  }
+}

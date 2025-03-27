@@ -28,7 +28,7 @@ def parse_args():
     parser.add_argument(
         "--subtask",
         type=str,
-        choices=["syllable", "word", "letter", "phoneme", "pseudo_word"],
+        choices=["syllable", "word", "letter", "phoneme", "pseudo_word", "sentence"],
         required=True,
     )
     parser.add_argument("--device", type=str, default="cuda")
