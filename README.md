@@ -6,14 +6,13 @@ To run letter-level tasks, you need to specify the model, dataset, and split nam
 At the moment, we support wav2vec2-CTC models that are integrated with the Hugging Face transformers library.
 
 ```sh
-model=bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-easyswahili
-dataset=bookbot/bookbot_swahili_egra
+model=bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes-bookbot
 split=test
 
-for subtask in syllable word letter phoneme pseudo_word; do
+for subtask in syllable letter phoneme pseudo_word; do
     python src/egra_inference.py \
         --model_name $model \
-        --dataset_name $dataset \
+        --dataset_name bookbot/bookbot_swahili_egra_althaf \
         --split_name $split \
         --subtask $subtask \
         --use_substitution_pairs
@@ -22,29 +21,25 @@ done
 
 ### Dataset
 
-The EGRA Swahili dataset is a collection of audio recordings and transcriptions of Swahili text. The dataset is split into subtasks: syllable, word, phoneme, and letter. The dataset is available on the Hugging Face Datasets Hub [here](https://huggingface.co/datasets/bookbot/bookbot_swahili_egra/). The dataset contains the following columns:
+We provide letter-level tasks which include syllable, word, letter, phoneme, and pseudo-word subtasks. The datasets are available on the Hugging Face Datasets Hub:
 
-| audio                                           | transcript | phonemes         | subtask     |
-| ----------------------------------------------- | ---------- | ---------------- | ----------- |
-| syllable/sw-TZ-Victoria_syllable_1150_0_nte.wav | nte        | n t ɛ            | syllable    |
-| word/sw-TZ-Victoria_001158_upinzani.wav         | upinzani   | u p i ⁿz ɑ n i   | word        |
-| letter/cha.wav                                  | cha        | t͡ʃ ɑ             | letter      |
-| phoneme/ð.wav                                   | ð          | ð                | phoneme     |
-| pseudo_word/zungate                             | zungate    | z u ᵑg ɑ t ɛ     | pseudo_word |
+- [Swahili EGRA Althaf (Kids)](https://huggingface.co/datasets/bookbot/bookbot_swahili_egra_althaf)
+
+> ‼️ Note: Swahili EGRA Althaf currently do not support the single-word task as a private evaluation was conducted.
 
 ## Sentence-level Task
 
 Similarly we provide a script to run the sentence-level task. The script requires the model, dataset, split, and the column name of the text to be transcribed.
 
 ```sh
-model="bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes"
+model=bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes-bookbot
 
-for dataset in "bookbot/common_voice_16_1_sw" "bookbot/fleurs_sw"; do
+for dataset in bookbot/common_voice_16_1_sw bookbot/fleurs_sw; do
     python src/sentence_inference.py \
-        --model=$model \
-        --dataset=$dataset \
-        --split="test" \
-        --text_column_name="phonemes_ipa" \
+        --model $model \
+        --dataset $dataset \
+        --split test \
+        --text_column_name phonemes_ipa \
         --chars_to_ignore , ? . ! - \; \: \" “ % ‘ ” �
 done
 ```
@@ -56,17 +51,19 @@ We provide pre-phonemized, sentence-level task datasets on the Hugging Face Data
 - [Common Voice Swahili](https://huggingface.co/datasets/bookbot/common_voice_16_1_sw)
 - [FLEURS Swahili](https://huggingface.co/datasets/bookbot/fleurs_sw)
 
+> ‼️ Note: Likewise, the datasets shared above are publicly available. The datasets used for the private evaluation (word and sentence tasks) are not shared publicly.
+
 ## Results
 
 The following table shows the performance of the model on the test sets:
 
-Model: [`bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes`](https://huggingface.co/bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes)
+Model: [`bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes-bookbot`](https://huggingface.co/bookbot/wav2vec2-xls-r-300m-swahili-cv-fleurs-alffa-alphabets-phonemes-bookbot)
 
-| Subtask     | PER (%) |
-| ----------- | ------: |
-| Sentence    |    6.28 |
-| Word        |    2.35 |
-| Pseudo Word |    3.33 |
-| Syllable    |    3.77 |
-| Letter      |    3.44 |
-| Phoneme     |   25.92 |
+| Dataset     | Subtask     | PER (%) |
+| ----------- | ----------- | ------: |
+| EGRA Althaf | Sentence    |    0.50 |
+| EGRA Althaf | Word        |    1.10 |
+| EGRA Althaf | Pseudo Word |    4.85 |
+| EGRA Althaf | Syllable    |    4.58 |
+| EGRA Althaf | Letter      |    2.38 |
+| EGRA Althaf | Phoneme     |    9.09 |
