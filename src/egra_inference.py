@@ -5,7 +5,7 @@ import json
 
 from tqdm.auto import tqdm
 from transformers import pipeline
-from datasets import load_dataset, Audio
+from datasets import load_dataset, Audio, Dataset
 import numpy as np
 import Levenshtein
 
@@ -23,7 +23,8 @@ python src/egra_inference.py \
 def parse_args():
     parser = ArgumentParser()
     parser.add_argument("--model_name", type=str, required=True)
-    parser.add_argument("--dataset_name", type=str, required=True)
+    parser.add_argument("--dataset_name", type=str)
+    parser.add_argument("--dataset_dir", type=Path)
     parser.add_argument("--split_name", type=str, default="test")
     parser.add_argument(
         "--subtask",
@@ -34,6 +35,7 @@ def parse_args():
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--audio_column_name", type=str, default="audio")
     parser.add_argument("--label_column_name", type=str, default="phonemes")
+    parser.add_argument("--subtask_column_name", type=str, default="subtask")
     parser.add_argument("--min_length_s", type=float, default=1.0)
     parser.add_argument("--output_dir", type=Path, default=Path("results"))
     parser.add_argument("--use_substitution_pairs", action="store_true")
@@ -90,9 +92,27 @@ def calculate_error_stats(labels, predictions, substitution_pairs=[]):
     }
 
 
+def load_local_dataset(
+    dataset_dir, audio_column_name="audio", label_column_name="phonemes", subtask_column_name="subtask"
+):
+    def _get_transcript(audio_file):
+        with open(audio_file.with_suffix(".txt"), "r") as f:
+            transcript = f.read().strip()
+        return transcript
+
+    audio_files = sorted(dataset_dir.glob("**/*.wav"))
+    dataset = Dataset.from_dict(
+        {
+            audio_column_name: [str(f) for f in audio_files],
+            label_column_name: [_get_transcript(f) for f in audio_files],
+            subtask_column_name: [f.parent.name for f in audio_files],
+        }
+    )
+    return dataset
+
+
 def main(args):
     model_name = args.model_name.split("/")[-1]
-    dataset_name = args.dataset_name.split("/")[-1]
     output_dir = args.output_dir / model_name / "egra"
     output_dir.mkdir(exist_ok=True, parents=True)
 
@@ -104,9 +124,15 @@ def main(args):
     )
     sampling_rate = transcriber.feature_extractor.sampling_rate
 
-    dataset = load_dataset(args.dataset_name, split=args.split_name)
+    if args.dataset_name:
+        dataset = load_dataset(args.dataset_name, split=args.split_name)
+        dataset_name = args.dataset_name.split("/")[-1]
+    elif args.dataset_dir:
+        dataset = load_local_dataset(args.dataset_dir)
+        dataset_name = args.dataset_dir.name
+
     dataset = dataset.cast_column(args.audio_column_name, Audio(sampling_rate=sampling_rate))
-    dataset = dataset.filter(lambda x: x == args.subtask, input_columns="subtask")
+    dataset = dataset.filter(lambda x: x == args.subtask, input_columns=args.subtask_column_name)
 
     def transcribe(datum):
         input_samples = datum[args.audio_column_name]["array"]
@@ -147,7 +173,7 @@ def main(args):
 
     results = {
         "model": args.model_name,
-        "dataset": args.dataset_name,
+        "dataset": dataset_name,
         "subtask": args.subtask,
         "per": per,
         "substitution_pairs": substitution_pairs,
